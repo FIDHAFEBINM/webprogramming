@@ -1,0 +1,50 @@
+<html>
+
+<body>
+<div style="background-color:#b7e3f7">
+<font style="padding:50%">REGISTRATIONFORM</font><br><br>
+<form name="forms" onsubmit="return validationform()">
+<label>Name</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="text" name="name"required><br>
+<br>
+<label>Email</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<input type="email" vlaue="email" name="email"required><br><br>
+<label>Password</label>&nbsp
+<input type="text" name="password"required><br><br>
+<label>phone No</label>
+<input type="text" name="phone"required><br><br>
+<input type="submit">&nbsp&nbsp
+
+</form>
+</div>
+<script>
+function validationform()
+{
+var name=document.forms.name.value;
+var password=document.forms.password.value;
+var phone=documrnt.forms.phone.value;
+var email=document.forms.email.value;
+var atposition=email.indexOf("@");
+var dotposition=email.lastindexOf(".");
+if (name=="")
+{
+alert("enter validate name");
+}
+else if(password.length<=7)
+{
+alert("enter atleast 8 values");
+}
+else if(atposition<1 || dotposition<atposition ||dotposition+2>=email.length)
+{
+alert("enter a valid email");
+}
+else if(phone.length<10)
+{
+alert("enter atleast 8 value");
+}
+}
+</script>
+
+
+</body>
+</html>
