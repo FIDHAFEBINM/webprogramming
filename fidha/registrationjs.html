@@ -1,50 +1,103 @@
-<html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<style>
+    table{
+        background-color: white;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top:1em;
+        padding:1em;
+        box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+    }
+    tr,td,th{
+        padding:1em;
+        text-align: left;
+    }
+    .center th{
+        text-align: center;
+    }
+    h2{
+        text-align: center;
+        margin-top: 2em;
+        background-color:black;
+        color: white;
+    }
+</style>
 <body>
-<div style="background-color:#b7e3f7">
-<font style="padding:50%">REGISTRATIONFORM</font><br><br>
-<form name="forms" onsubmit="return validationform()">
-<label>Name</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<input type="text" name="name"required><br>
-<br>
-<label>Email</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<input type="email" vlaue="email" name="email"required><br><br>
-<label>Password</label>&nbsp
-<input type="text" name="password"required><br><br>
-<label>phone No</label>
-<input type="text" name="phone"required><br><br>
-<input type="submit">&nbsp&nbsp
+    <h2>FORM VALIDATION</h2>
+    <form name="form" action="" method="POST" onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="fname"> </td>
+            </tr>
+            <tr>
+                <th>Email </th>
+                <td><input type="email" name="email"> </td>
+            </tr>
+            <tr>
+                <th>Mob NO </th>
+                <td><input type="tel" name="mob"> </td>
+            </tr>
+            
+            <tr>
+                <th>Password </th>
+                <td><input type="password" name="passcode"> </td>
+            </tr>
+            <tr class="center">
+                <th colspan="2"><input type="submit" value="submit"></th>
+            </tr>
+        </table>
+    </form>
 
-</form>
-</div>
-<script>
-function validationform()
-{
-var name=document.forms.name.value;
-var password=document.forms.password.value;
-var phone=documrnt.forms.phone.value;
-var email=document.forms.email.value;
-var atposition=email.indexOf("@");
-var dotposition=email.lastindexOf(".");
-if (name=="")
-{
-alert("enter validate name");
-}
-else if(password.length<=7)
-{
-alert("enter atleast 8 values");
-}
-else if(atposition<1 || dotposition<atposition ||dotposition+2>=email.length)
-{
-alert("enter a valid email");
-}
-else if(phone.length<10)
-{
-alert("enter atleast 8 value");
-}
-}
-</script>
+    <script>
+        function validateForm() {
+            var fname = document.form.fname.value;
+            var mob = document.form.mob.value;
+            
+            var passcode = document.form.passcode.value;
+            var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            var ren = /[0-9!@#$%^&*]/
 
+            if (fname == "") {
+                alert("Enter First Name !!");
+                document.form.fname.focus();
+                return false;
+            }
+            else if(ren.test(fname)){
+                alert("Enter Valid Name !!");
+                document.form.fname.focus();
+                return false;
+            }
 
+            if (mob == "") {
+                alert("Enter Mobile number");
+                return false;
+            }
+            else if (isNaN(mob)) {
+                alert("Enter valid Mobile number");
+                return false;
+            }
+            else if (mob.length != 10) {
+                alert("Enter Mobile number with 10 digit");
+                return false;
+            }
+
+            
+
+            if (passcode == "" || passcode.length < 8 || !re.test(passcode)) {
+                alert("Enter minimum 8 digit Password !!" + '\n' + "Atleast one Lowercase & uppercase & digti & special charecter must be included");
+                document.form.passcode.focus();
+                return false;
+            }
+
+        }
+    </script>
 </body>
+
 </html>
