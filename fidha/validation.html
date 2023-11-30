@@ -1,14 +1,15 @@
 <html>
 <title>registration form</title>
 <head>
-<script>
+<script type="text/javascript">
 function validationform()
 {
 var name=document.forms.names.value;
 var email=document.forms.email.value;
 var password=document.forms.password.value;
 var number=document.forms.number.value;
-var mailformat=/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+var atsymbol=email.indexOf("@");
+var dotsymbol=email.indexOf(".");
 if(name==""){
 alert("name must be filled");
 return false;
@@ -18,16 +19,18 @@ if (password.length<8)
 alert("enter a strong password");
 return false;
 }
-if(number.length<10)
+if(number.length!=10)
 {
 alert("enter 10 numbers");
 return false;
 }
-if(email.inputText.value.match(mailformat))
+if((atsymbol != -1) && (atsymbol !=0) && (dotsymbol != -1) && (dotsymbol !=0)&& (dotsymbol>atsymbol+1) && (email.length>dotsymbol+1))
 {
+alert("email address is valid");
 return true;
 }
 else{
+
 alert("enter valid email");
 return false;
 }
@@ -57,18 +60,19 @@ margin-top:100px;}
 <tr>
 <td>
 <label>Name</label></td>
-<td><input type="text" name="names">
+<td><input type="text" name="names"></td></tr>
 
 
 <tr><td><label>Email</label></td>
-<td><input type="email" value="" name="email"></td></tr>
+<td><input type="text" value="" name="email"></td></tr>
 <tr><td><label>Password</label></td>
 <td><input type="password" name="password"></td></tr>
 <tr><td><label>phone no</label></td>
 <td><input type="text" name="number"></td></tr>
-<tr><td><input type="submit"><td></tr>
-
+<tr><td><input type="submit"></td></tr>
+</table>
 </form>
+
 </div>
 
 
