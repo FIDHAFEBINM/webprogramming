@@ -1,116 +1,132 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calender</title>
-    <style>
-        .selection {
-            text-align: center;
-            margin-bottom: 2em;
-            background-color:rgb(174, 179, 181);
-            width: 100%;   
-        }
-        #year_get,#month_get{
-            padding:5px;
-            width:75%;
-        }
-        input{
-            padding: 5px;
-        }
-        .tabselection {
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-        }
-       table{
-           padding: 5px;
-       }
-       tr{
-           
-       }
-       .selrow{
-         border: none;
-       }
-       td,th{
-           padding: 10px;
-           border: 1px solid black;
-       }
-       .selcol{
-        padding:0px;
-         border: none;
-       text-align: center;
-       }
-       #calender{
-           border-collapse: collapse;
-           margin-left: auto;
-            margin-right: auto;
-       }
-       #resetbtn{
-        background-color:red;
-           border: none;
-           color: white;
-       }
-       #subtn{
-           background-color:green;
-           border: none;
-           color: white;
-       }
-     
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Calendar</title>
+  <style type="text/css">
+    td {
+      padding: 5px;
+    }
+
+    tr.month {
+      color: #b30000;
+      color: white;
+      font-size: 18px;
+      background-color: black;
+    }
+
+    #calendar {
+      width: 100%;
+    }
+
+    .mon {
+      width: 100px;
+      height: 250px;
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .head {
+      background: ;
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19);
+      padding: 10px;
+    }
+
+    #btn {
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 5px;
+      ;
+      outline: none;
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="selection">
-        <table class="tabselection" cellspacing="10">
-            <tbody>
-                <tr class="selrow">
-                    <td class="selcol"><input id="year_get" type="number" placeholder="year"> </td>
-                    <td class="selcol"><input id="month_get" type="number" placeholder="month"> </td>
-                </tr>
-                <tr class="selrow">
-                    <td  colspan="2" class="selcol"><input onclick="generate()" type="button" id="subtn" value="Generate Calender"> </td>
-                </tr>
-                <tr class="selrow">
-                    <td  colspan="2" class="selcol"><input type="reset" value="reset" id="resetbtn" onclick="location.reload();"> </td>
-                </tr>
-            </tbody>
-        </table>
+  <div align='center' style="margin-top:5%">
+    <div class="head">
+      <b style="font-size: 20px;font-family: 'Courier New', Courier, monospace;">Select YEAR: </b>
+      <select id="year">
+        <script>
+          var year = [];
+          var i;
+          for (i = 0; i < 52; i++) {
+            year.push(1970 + i);
+          }
+          for (i = 0; i < year.length; i++) {
+            document.write("<option value='" + year[i] + "'>" + year[i] + "</option>");
+          }
+        </script>
+      </select>
+      &nbsp;&nbsp;
+      <button type="button" name="View" id="btn" onclick="createCalendar()">view calander
+      </button>
     </div>
-    <div id="content"> </div>
-</body>
-<script>
-    function generate() {
-        var init_content = "<table BORDER=1 id='calender'><tr><th>SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr><tr>"
-        var year_get = document.getElementById("year_get").value;
-        var month_get = document.getElementById("month_get").value;
-        month_get -=1;
+    <br><br><br>
 
-        var date = new Date(year_get,month_get);
-        var day = date.getDay();
-        for (var i = 0; i < day; i++) {
-            init_content += "<td></td>";
-        }
-        while (date.getMonth() == month_get) {
-            init_content += "<td>" + date.getDate() + "</td>";
-            if (date.getDay() % 7 == 6) {
-                init_content += "</tr><tr>";
+    <div id="calendar">
+    </div>
+
+    <script>
+      function createCalendar() {
+        var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var j;
+        var d = "";
+        d += "<table><tr class='month'><th>January</th><th>February</th><th>March</th><th>April</th><th>May</th></tr><tr>";
+        for (j = 0; j < 12; j++) {
+          d += "<td><table class='mon' border='1' style='float:left; margin-left: 1%;'><tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr><tr>";
+          var mm = j;
+          var yy = document.getElementById('year').value;
+          var c = new Date(yy, mm, 1);
+          var day = c.getDay();
+          var i;
+          for (i = 0; i < day; i++) {
+            d += "<td></td>";
+          }
+          while (c.getMonth() == mm) {
+            d += "<td>" + c.getDate() + "</td>";
+            if (c.getDay() % 7 == 6) {
+              d += "</tr><tr>";
             }
-            date.setDate(date.getDate() + 1);
-        }
-        
-        while(date.getDay() % 7 != 6 && date.getDay() % 7 != 0){
-            init_content += "<td></td>";
-            date.setDate(date.getDate() + 1);
-        }
-        
-        if(date.getDay() % 7 > 0){
-            init_content += "<td></td></tr>";
+            c.setDate(c.getDate() + 1);
+          }
+
+
+          while (c.getDay() % 7 != 6 && c.getDay() % 7 != 0) {
+            d += "<td></td>";
+            c.setDate(c.getDate() + 1);
+          }
+
+          if (c.getDay() % 7 > 0) {
+            d += "<td></td>";
+          }
+
+
+          d += "</tr></table></td>";
+          if (mm == 4) {
+            d += "</tr><tr class='month'><th>June</th><th>July</th><th>August</th><th>September</th><th>October</th></tr><tr>";
+          }
+          else if (mm == 9) {
+            d += "</tr><tr class='month'><th>November</th><th>December</th></tr><tr>";
+          }
         }
 
-        init_content += "</table>"
-        document.getElementById("content").innerHTML = init_content;
-    }
-</script>
+
+
+        d += "</tr></table>";
+        document.getElementById('calendar').innerHTML = d;
+      }
+    </script>
+  </div>
+
+</body>
 
 </html>
+
+     
+     
+                 
+      
