@@ -1,0 +1,30 @@
+<html>
+<body align="center">
+<font  ><b>CANDIDATE LOGIN</b></font>
+<div align="center">
+<form>
+
+<label>User Name</label><br>
+<input type="text" id="user"><br>
+<label>Password</label><br>
+<input type="password" id="pass"><br>
+
+</form>
+<button onclick="onlineexam()"  >SUBMIT</button>
+</div>
+<script>
+function onlineexam(){
+var user=document.getElementById("user").value;
+var pass=document.getElementById("pass").value;
+if(user==="admin" && pass==="password")
+{
+
+window.location.href="question.html";
+}
+else{
+alert("login failed")
+}
+}
+</script>
+</body>
+</html>
